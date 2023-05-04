@@ -40,10 +40,6 @@
       </intent-filter>
     </activity>
 
-    <activity
-      android:name=".ui.details.DetailActivity"
-      android:launchMode="singleTop" />
-
     <provider
       android:name="androidx.startup.InitializationProvider"
       android:authorities="com.merit.hassadmallsdk.androidx-startup"
