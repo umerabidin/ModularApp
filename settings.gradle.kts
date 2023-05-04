@@ -33,7 +33,7 @@ dependencyResolutionManagement {
     maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
   }
 }
-rootProject.name = "Pokedex"
+rootProject.name = "SampleApp"
 include(":app")
 include(":core-model")
 include(":core-network")

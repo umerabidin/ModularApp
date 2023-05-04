@@ -16,22 +16,18 @@
 
 package com.merit.hassadmallsdk.core.network.di
 
-import android.app.Application
 import android.util.Log
 import com.merit.hassadmallsdk.core.network.service.PokedexClient
-import com.merit.hassadmallsdk.core.network.service.PokedexService
+import com.merit.hassadmallsdk.core.network.service.HassadMallServiceApi
 import com.merit.hassadmallsdk.core.network.utils.LiveDataCallAdapterFactory
-import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -69,13 +65,13 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun providePokedexService(retrofit: Retrofit): PokedexService {
-        return retrofit.create(PokedexService::class.java)
+    fun providePokedexService(retrofit: Retrofit): HassadMallServiceApi {
+        return retrofit.create(HassadMallServiceApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun providePokedexClient(pokedexService: PokedexService): PokedexClient {
-        return PokedexClient(pokedexService)
+    fun providePokedexClient(hassadMallServiceApi: HassadMallServiceApi): PokedexClient {
+        return PokedexClient(hassadMallServiceApi)
     }
 }

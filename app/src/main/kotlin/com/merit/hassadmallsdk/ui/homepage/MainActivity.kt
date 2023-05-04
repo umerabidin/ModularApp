@@ -19,7 +19,6 @@ package com.merit.hassadmallsdk.ui.homepage
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.Observer
 import com.google.gson.Gson
 import com.merit.hassadmallsdk.R
 import com.merit.hassadmallsdk.databinding.ActivityMainBinding
@@ -44,12 +43,70 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.btnGetConversionRate.setOnClickListener {
             viewModel.getConversionRate()
         }
+        binding.btnGetHomeBanners.setOnClickListener {
+            viewModel.getHomeBanners()
+        }
+        binding.btnGetGiftCardCurrencies.setOnClickListener {
+            viewModel.getGiftCardUnitCurrencies()
+        }
 
         startObservings()
 
     }
 
     private fun startObservings() {
+
+        viewModel.getHomeBannerLiveData.observe(this) { event ->
+            when (event.peakContent().status) {
+                Status.SUCCESS -> {
+                    event.peakContent().data?.let { response ->
+                        binding.tvResponse.text = Gson().toJson(response.homepage_banners.toString())
+                    }
+                }
+
+                Status.ERROR -> {
+                    if (event.peakContent().message is String) {
+                    } else {
+                    }
+                }
+
+                Status.LOADING -> {
+                }
+
+                Status.ERROR_INT -> {
+                    event.peakContent().messageId?.let {
+                    }
+                }
+            }
+
+
+        }
+
+        viewModel.getGiftCardUnitCurrenciesLiveData.observe(this) { event ->
+            when (event.peakContent().status) {
+                Status.SUCCESS -> {
+                    event.peakContent().data?.let { response ->
+                        binding.tvResponse.text = Gson().toJson(response.giftcard_units.toString())
+                    }
+                }
+
+                Status.ERROR -> {
+                    if (event.peakContent().message is String) {
+                    } else {
+                    }
+                }
+
+                Status.LOADING -> {
+                }
+
+                Status.ERROR_INT -> {
+                    event.peakContent().messageId?.let {
+                    }
+                }
+            }
+
+
+        }
 
         viewModel.getConversionRateLiveData.observe(this) { event ->
             when (event.peakContent().status) {

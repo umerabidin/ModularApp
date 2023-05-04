@@ -22,7 +22,11 @@ import com.merit.hassadmallsdk.core.model.CountriesListResponse
 import com.merit.hassadmallsdk.core.model.conversion_rate.request.ConversionRateRequestParam
 import com.merit.hassadmallsdk.core.model.conversion_rate.request.GiftCardUnit
 import com.merit.hassadmallsdk.core.model.conversion_rate.response.GetConversionRateResponse
+import com.merit.hassadmallsdk.core.model.giftcard_unit_currencies.response.GiftCardUnitCurrencyResponse
+import com.merit.hassadmallsdk.core.model.homebanner.response.HomeBannerResponse
 import com.merit.hassadmallsdk.usecase.conversion_rate.GetConversionRateUseCase
+import com.merit.hassadmallsdk.usecase.giftcard_unit_currencies.GetGiftCardUnitCurrencyUseCase
+import com.merit.hassadmallsdk.usecase.homebanner.GetHomeBannerUseCase
 import com.merit.hassadmallsdk.utils.Event
 import com.merit.hassadmallsdk.utils.Resource
 import com.skydoves.bindables.BindingViewModel
@@ -34,6 +38,8 @@ import javax.inject.Inject
 class HomeApiViewModel @Inject constructor(
     private val getAllCountriesUseCase: GetAllCountriesUseCase,
     private val getConversionRateUseCase: GetConversionRateUseCase,
+    private val getHomeBannerUserCase: GetHomeBannerUseCase,
+    private val getGiftCardUnitCurrenciesUseCase: GetGiftCardUnitCurrencyUseCase,
 ) :
     BindingViewModel() {
 
@@ -55,6 +61,26 @@ class HomeApiViewModel @Inject constructor(
                 getConversionRateUseCase.run(
                     ConversionRateRequestParam(GiftCardUnit(1))
                 )
+            )
+        }
+    }
+
+
+    val getHomeBannerLiveData = MutableLiveData<Event<Resource<HomeBannerResponse>>>()
+    fun getHomeBanners() {
+        getCountriesLiveData.value = Event(Resource.loading(null))
+        viewModelScope.launch {
+            getHomeBannerLiveData.value = Event(getHomeBannerUserCase.run())
+        }
+    }
+
+
+    val getGiftCardUnitCurrenciesLiveData = MutableLiveData<Event<Resource<GiftCardUnitCurrencyResponse>>>()
+    fun getGiftCardUnitCurrencies() {
+        getGiftCardUnitCurrenciesLiveData.value = Event(Resource.loading(null))
+        viewModelScope.launch {
+            getGiftCardUnitCurrenciesLiveData.value = Event(
+                getGiftCardUnitCurrenciesUseCase.run()
             )
         }
     }
