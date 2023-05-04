@@ -24,4 +24,6 @@
   <string name="def">DEF</string>
   <string name="spd">SPD</string>
   <string name="exp">EXP</string>
+  <string name="err_generic">Something went wrong</string>
+  <string name="err_no_connection">No Internet Connection</string>
 </resources>

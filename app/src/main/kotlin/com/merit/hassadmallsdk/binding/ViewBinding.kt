@@ -32,7 +32,6 @@ import com.github.florent37.glidepalette.GlidePalette
 import com.google.android.material.card.MaterialCardView
 import com.skydoves.androidribbon.RibbonRecyclerView
 import com.skydoves.androidribbon.ribbonView
-import com.merit.hassadmallsdk.core.model.PokemonInfo
 import com.merit.hassadmallsdk.utils.PokemonTypeUtils
 import com.merit.hassadmallsdk.utils.SpacesItemDecoration
 import com.skydoves.progressview.ProgressView
@@ -121,37 +120,37 @@ object ViewBinding {
     }
   }
 
-  @JvmStatic
-  @BindingAdapter("bindPokemonTypes")
-  fun bindPokemonTypes(recyclerView: RibbonRecyclerView, types: List<PokemonInfo.TypeResponse>?) {
-    types.whatIfNotNullOrEmpty {
-      recyclerView.clear()
-      for (type in it) {
-        with(recyclerView) {
-          addRibbon(
-            ribbonView(context) {
-              setText(type.type.name)
-              setTextColor(Color.WHITE)
-              setPaddingLeft(84f)
-              setPaddingRight(84f)
-              setPaddingTop(2f)
-              setPaddingBottom(10f)
-              setTextSize(16f)
-              setRibbonRadius(120f)
-              setTextStyle(Typeface.BOLD)
-              setRibbonBackgroundColorResource(
-                PokemonTypeUtils.getTypeColor(type.type.name)
-              )
-            }.apply {
-              maxLines = 1
-              gravity = Gravity.CENTER
-            }
-          )
-          addItemDecoration(SpacesItemDecoration())
-        }
-      }
-    }
-  }
+//  @JvmStatic
+//  @BindingAdapter("bindPokemonTypes")
+//  fun bindPokemonTypes(recyclerView: RibbonRecyclerView, types: List<PokemonInfo.TypeResponse>?) {
+//    types.whatIfNotNullOrEmpty {
+//      recyclerView.clear()
+//      for (type in it) {
+//        with(recyclerView) {
+//          addRibbon(
+//            ribbonView(context) {
+//              setText(type.type.name)
+//              setTextColor(Color.WHITE)
+//              setPaddingLeft(84f)
+//              setPaddingRight(84f)
+//              setPaddingTop(2f)
+//              setPaddingBottom(10f)
+//              setTextSize(16f)
+//              setRibbonRadius(120f)
+//              setTextStyle(Typeface.BOLD)
+//              setRibbonBackgroundColorResource(
+//                PokemonTypeUtils.getTypeColor(type.type.name)
+//              )
+//            }.apply {
+//              maxLines = 1
+//              gravity = Gravity.CENTER
+//            }
+//          )
+//          addItemDecoration(SpacesItemDecoration())
+//        }
+//      }
+//    }
+//  }
 
   @JvmStatic
   @BindingAdapter("progressView_labelText")

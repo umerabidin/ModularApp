@@ -86,6 +86,8 @@ dependencies {
 //  testImplementation(projects.coreDatabase)
 //  testImplementation(projects.coreTest)
 //  androidTestImplementation(projects.coreTest)
+  implementation(libs.retrofit)
+
 
   // androidx
   implementation(libs.material)

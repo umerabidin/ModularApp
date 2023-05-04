@@ -17,10 +17,8 @@
 package com.merit.hassadmallsdk.core.network.di
 
 
-import com.merit.hassadmallsdk.core.network.repository.DetailRepository
-import com.merit.hassadmallsdk.core.network.repository.DetailRepositoryImpl
-import com.merit.hassadmallsdk.core.network.repository.MainRepository
-import com.merit.hassadmallsdk.core.network.repository.MainRepositoryImpl
+import com.merit.hassadmallsdk.core.network.repository.countries.GetCountriesRepositoryImpl
+import com.merit.hassadmallsdk.core.network.repository.countries.GetHomeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -29,14 +27,9 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface DataModule {
-
   @Binds
-  fun bindsMainRepository(
-    mainRepositoryImpl: MainRepositoryImpl
-  ): MainRepository
+  fun bindHomeApisRepositoryImpl(
+    detailRepositoryImpl: GetCountriesRepositoryImpl
+  ): GetHomeRepository
 
-  @Binds
-  fun bindsDetailRepository(
-    detailRepositoryImpl: DetailRepositoryImpl
-  ): DetailRepository
 }

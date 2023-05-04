@@ -16,21 +16,30 @@
 
 package com.merit.hassadmallsdk.core.network.service
 
-import com.merit.hassadmallsdk.core.model.PokemonInfo
-import com.merit.hassadmallsdk.core.network.model.PokemonResponse
-import com.skydoves.sandwich.ApiResponse
+import com.merit.hassadmallsdk.core.model.CountriesListResponse
+import com.merit.hassadmallsdk.core.model.conversion_rate.request.ConversionRateRequestParam
+import com.merit.hassadmallsdk.core.model.conversion_rate.response.GetConversionRateResponse
+import com.merit.hassadmallsdk.core.network.HassadMallBaseResponse
+import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.POST
 
 interface PokedexService {
+    @GET("countries")
+    suspend fun getAllCountries(): Response<HassadMallBaseResponse<CountriesListResponse>>
 
-  @GET("pokemon")
-  suspend fun fetchPokemonList(
-    @Query("limit") limit: Int = 20,
-    @Query("offset") offset: Int = 0
-  ): ApiResponse<PokemonResponse>
 
-  @GET("pokemon/{name}")
-  suspend fun fetchPokemonInfo(@Path("name") name: String): ApiResponse<PokemonInfo>
+    @POST("giftcard_units/get_currencies")
+    suspend fun getAllCurrencies(): Response<HassadMallBaseResponse<CountriesListResponse>>
+
+
+    @POST("giftcard_units/get_conversion_rate")
+    suspend fun getCurrencyConversionRate(@Body params: ConversionRateRequestParam): Response<HassadMallBaseResponse<GetConversionRateResponse>>
+
+
+    @GET("homepage_banners")
+    suspend fun getHomeBanners(): Response<HassadMallBaseResponse<CountriesListResponse>>
+
+
 }

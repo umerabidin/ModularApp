@@ -1,1 +1,1 @@
-/Users/umerabidin/Desktop/Android_Studio_Projects/MI/ModularApp/buildSrc/build/classes/kotlin/main/com/merit/hassadmallsdk/Configuration.class
+D:\Android\Projects\MI\ModularApp\buildSrc\build\classes\kotlin\main\com\merit\hassadmallsdk\Configuration.class

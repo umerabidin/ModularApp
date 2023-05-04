@@ -16,31 +16,15 @@
 
 package com.merit.hassadmallsdk.core.network.service
 
-import com.merit.hassadmallsdk.core.model.PokemonInfo
-import com.merit.hassadmallsdk.core.network.model.PokemonResponse
-import com.skydoves.sandwich.ApiResponse
+import com.merit.hassadmallsdk.core.model.CountriesListResponse
+import com.merit.hassadmallsdk.core.model.conversion_rate.request.ConversionRateRequestParam
+import com.merit.hassadmallsdk.core.model.conversion_rate.response.GetConversionRateResponse
+import com.merit.hassadmallsdk.core.network.HassadMallBaseResponse
+import retrofit2.Response
 import javax.inject.Inject
 
-class PokedexClient @Inject constructor(
-  private val pokedexService: PokedexService
-) {
+class PokedexClient @Inject constructor(private val pokedexService: PokedexService) {
+  suspend fun getAllCountries(): Response<HassadMallBaseResponse<CountriesListResponse>> = pokedexService.getAllCountries()
+  suspend fun getConversionRate(params: ConversionRateRequestParam): Response<HassadMallBaseResponse<GetConversionRateResponse>> = pokedexService.getCurrencyConversionRate(params)
 
-  suspend fun fetchPokemonList(
-    page: Int
-  ): ApiResponse<PokemonResponse> =
-    pokedexService.fetchPokemonList(
-      limit = PAGING_SIZE,
-      offset = page * PAGING_SIZE
-    )
-
-  suspend fun fetchPokemonInfo(
-    name: String
-  ): ApiResponse<PokemonInfo> =
-    pokedexService.fetchPokemonInfo(
-      name = name
-    )
-
-  companion object {
-    private const val PAGING_SIZE = 20
-  }
 }
